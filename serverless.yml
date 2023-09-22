@@ -1,0 +1,24 @@
+service: lambda-culqui
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-east-1
+
+functions:
+  lambda-culqui-tokens:
+    handler: src/functions/tokens.handler
+    events:
+      - httpApi: POST /tokens
+
+  lambda-culqui-charges:
+    handler: src/functions/charges.handler
+    events:
+      - httpApi: POST /charges
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+  - serverless-dotenv-plugin
